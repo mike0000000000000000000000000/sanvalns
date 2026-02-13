@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Valentino 💜</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Georgia", serif;
+    color: #f5eaff;
+    text-align: center;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255, 182, 193, 0.35), transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(255, 105, 180, 0.25), transparent 40%),
+        linear-gradient(135deg, #6b2d5c, #b76e79, #f4c2c2);
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.4));
+    pointer-events: none;
+}
+
+
+.container {
+    position: relative;
+}
+
+img {
+    width: 200px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 10px 0;
+}
+
+h2 {
+    font-size: 36px;
+    font-style: italic;
+}
+
+.buttons {
+    margin-top: 30px;
+    position: relative;
+    height: 100px;
+}
+
+button {
+    padding: 12px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #d7c8ff;
+    color: #4b3b6b;
+    margin: 10px;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    position: absolute;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <img src="Immagine 2026-02-13 151306.png" alt="cute cat">
+
+    <h1>Hey Salome!</h1>
+    <h2>Vuoi passare San Valentino con me?</h2>
+
+    <div class="buttons">
+        <button onclick="yesClicked()">Sì</button>
+        <button id="noBtn">No</button>
+    </div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
+
+function moveButton() {
+    const container = document.querySelector(".buttons");
+    const maxX = container.clientWidth - noBtn.clientWidth;
+    const maxY = container.clientHeight - noBtn.clientHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+function yesClicked() {
+    document.body.innerHTML = `
+        <div style="text-align:center">
+            <h1>SEEEEEEEEE</h1>
+            <h2>Ti voglio bene scema ✨</h2>
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
