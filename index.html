@@ -1,126 +1,538 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>San Valentino 💜</title>
-
-<style>
-body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Georgia", serif;
-    color: #f5eaff;
-    text-align: center;
-    background:
-        radial-gradient(circle at 30% 20%, rgba(255, 182, 193, 0.35), transparent 40%),
-        radial-gradient(circle at 70% 80%, rgba(255, 105, 180, 0.25), transparent 40%),
-        linear-gradient(135deg, #6b2d5c, #b76e79, #f4c2c2);
-}
-
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle, transparent 40%, rgba(0,0,0,0.4));
-    pointer-events: none;
-}
-
-
-.container {
-    position: relative;
-}
-
-img {
-    width: 200px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-}
-
-h1 {
-    font-size: 48px;
-    margin: 10px 0;
-}
-
-h2 {
-    font-size: 36px;
-    font-style: italic;
-}
-
-.buttons {
-    margin-top: 30px;
-    position: relative;
-    height: 100px;
-}
-
-button {
-    padding: 12px 28px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background: #d7c8ff;
-    color: #4b3b6b;
-    margin: 10px;
-    transition: 0.2s;
-}
-
-button:hover {
-    transform: scale(1.1);
-}
-
-#noBtn {
-    position: absolute;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>per te ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fff0f0 0%, #ffd9d9 100%);
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .bg-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .container {
+            position: relative;
+            width: 900px;
+            max-width: 95vw;
+            height: 750px;
+            max-height: 95vh;
+            background: rgba(255, 245, 240, 0.7);
+            backdrop-filter: blur(6px);
+            border-radius: 60px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 0 0 3px #ffb0b0 inset, 0 0 30px rgba(255, 120, 120, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 10;
+            border: 1px solid rgba(255, 200, 200, 0.6);
+        }
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.8rem;
+            color: #c45a5a;
+            text-align: center;
+            margin-bottom: 5px;
+            text-shadow: 3px 3px 8px rgba(255, 150, 150, 0.6);
+            animation: titleGlow 3s infinite alternate;
+        }
+        @keyframes titleGlow {
+            0% { text-shadow: 3px 3px 8px rgba(255,150,150,0.6); }
+            100% { text-shadow: 5px 5px 15px rgba(255,100,100,0.9); }
+        }
+        .timer-container {
+            background: rgba(255, 220, 220, 0.9);
+            padding: 16px 30px;
+            border-radius: 70px;
+            backdrop-filter: blur(4px);
+            border: 2px solid #ffa5a5;
+            box-shadow: 0 8px 0 #d18484;
+            margin: 5px 0 15px 0;
+            font-weight: 600;
+            z-index: 15;
+        }
+        #timer {
+            font-size: 1.8rem;
+            font-family: 'Quicksand', sans-serif;
+            color: #5f2b2b;
+            letter-spacing: 1px;
+        }
+        #timer span {
+            background: #ffecec;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin: 0 4px;
+            border: 1px solid #ffb8b8;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .animation-zone {
+            position: relative;
+            width: 100%;
+            flex: 1;
+            min-height: 380px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .heart-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            filter: drop-shadow(0 15px 12px rgba(200, 50, 50, 0.5));
+            z-index: 30;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            transition: filter 0.3s;
+        }
+        .heart-btn i {
+            font-size: 180px;
+            color: #ff4d6d;
+            transition: 0.3s;
+            display: block;
+            filter: drop-shadow(0 0 15px #ff8a8a);
+        }
+        .heart-btn:hover i {
+            color: #ff1a3f;
+            transform: scale(1.08);
+            filter: drop-shadow(0 0 25px #ff5e5e);
+        }
+        .seed {
+            position: absolute;
+            width: 45px;
+            height: 65px;
+            background: radial-gradient(circle at 40% 40%, #d89c6b, #7b4f2e);
+            border-radius: 50% 50% 40% 40%;
+            box-shadow: 0 12px 0 #5a3b22, 0 15px 20px rgba(0,0,0,0.4);
+            z-index: 35;
+            display: none;
+            pointer-events: none;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(15deg);
+            border-left: 2px solid #f0b27a;
+        }
+        #treeCanvas {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 520px;
+            max-width: 100%;
+            display: none;
+            z-index: 20;
+            pointer-events: none;
+        }
+        .final-message {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            font-weight: 400;
+            color: #b34545;
+            opacity: 0;
+            transition: opacity 1.5s, transform 1.5s;
+            margin-top: 25px;
+            text-align: center;
+            line-height: 1.3;
+            max-width: 85%;
+            background: rgba(255, 240, 240, 0.7);
+            padding: 15px 35px;
+            border-radius: 70px;
+            backdrop-filter: blur(3px);
+            border: 1px solid #ffb3b3;
+            box-shadow: 0 4px 12px rgba(180, 100, 100, 0.2);
+            transform: scale(0.9);
+            z-index: 25;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 3px rgba(255, 200, 200, 0.8);
+        }
+        .final-message.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        /* Pulsante per controllare la musica */
+        .music-control {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 220, 220, 0.9);
+            border: 2px solid #ffa5a5;
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Quicksand', sans-serif;
+            color: #5f2b2b;
+            font-weight: 500;
+        }
+        .music-control:hover {
+            background: rgba(255, 200, 200, 0.9);
+            transform: scale(1.05);
+        }
+        .music-control i {
+            font-size: 1.2rem;
+            color: #b34545;
+        }
+        .star {
+            position: absolute;
+            pointer-events: none;
+            z-index: 5;
+            filter: blur(1px);
+            animation: floatStar 12s infinite alternate ease-in-out;
+        }
+        @keyframes floatStar {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            100% { transform: translate(15px, -15px) scale(1.2); opacity: 0.8; }
+        }
+    </style>
 </head>
-
 <body>
-
-<div class="container">
-    <img src="Immagine 2026-02-13 151306.png" alt="cute cat">
-
-    <h1>Hey Salome!</h1>
-    <h2>Vuoi passare San Valentino con me?</h2>
-
-    <div class="buttons">
-        <button onclick="yesClicked()">Sì</button>
-        <button id="noBtn">No</button>
+    <div class="bg-particles" id="bgParticles"></div>
+    
+    <!-- Controllo musica (inizialmente nascosto, appare dopo il primo click) -->
+    <div class="music-control" id="musicControl" style="display: none;">
+        <i class="fas fa-music" id="musicIcon"></i>
+        <span id="musicStatus">🔊 In riproduzione</span>
     </div>
-</div>
-
-<script>
-const noBtn = document.getElementById("noBtn");
-
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("click", moveButton);
-
-function moveButton() {
-    const container = document.querySelector(".buttons");
-    const maxX = container.clientWidth - noBtn.clientWidth;
-    const maxY = container.clientHeight - noBtn.clientHeight;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-}
-
-function yesClicked() {
-    document.body.innerHTML = `
-        <div style="text-align:center">
-            <h1>SEEEEEEEEE</h1>
-            <h2>Ti voglio bene scema ✨</h2>
+    
+    <div class="container">
+        <div class="main-title">per te ❤️</div>
+        <div class="timer-container">
+            <div id="timer">0 giorni 00 ore 00 minuti 00 secondi</div>
         </div>
-    `;
-}
-</script>
+        <div class="animation-zone">
+            <button class="heart-btn" id="heartBtn">
+                <i class="fas fa-heart"></i>
+            </button>
+            <div class="seed" id="seed"></div>
+            <canvas id="treeCanvas" width="750" height="520"></canvas>
+        </div>
+        <div class="final-message" id="finalMessage">
+            “Quel giorno non è stato un caso…<br>è stato l’inizio di qualcosa di bello.”
+        </div>
+    </div>
 
+    <audio id="bgMusic" loop preload="auto">
+        <source src="Pardonne-Moi.mp3" type="audio/mpeg">
+        Il tuo browser non supporta l'audio HTML5.
+    </audio>
+
+    <script>
+        (function() {
+            const startDate = new Date(2022, 10, 6, 0, 0, 0);
+            const heartBtn = document.getElementById('heartBtn');
+            const seed = document.getElementById('seed');
+            const canvas = document.getElementById('treeCanvas');
+            const ctx = canvas.getContext('2d');
+            const timerDiv = document.getElementById('timer');
+            const finalMsg = document.getElementById('finalMessage');
+            const bgParticles = document.getElementById('bgParticles');
+            const bgMusic = document.getElementById('bgMusic');
+            const musicControl = document.getElementById('musicControl');
+            const musicIcon = document.getElementById('musicIcon');
+            const musicStatus = document.getElementById('musicStatus');
+
+            let animationStarted = false;
+            let floatingHearts = [];
+            let stars = [];
+            let isMusicPlaying = false;
+
+            // Timer
+            function updateTimer() {
+                const now = new Date();
+                const diffMs = now - startDate;
+                const totalSeconds = Math.floor(diffMs / 1000);
+                const seconds = totalSeconds % 60;
+                const totalMinutes = Math.floor(totalSeconds / 60);
+                const minutes = totalMinutes % 60;
+                const totalHours = Math.floor(totalMinutes / 60);
+                const hours = totalHours % 24;
+                const days = Math.floor(totalHours / 24);
+                timerDiv.innerHTML = `<span>${days} giorni</span> <span>${hours.toString().padStart(2,'0')} ore</span> <span>${minutes.toString().padStart(2,'0')} minuti</span> <span>${seconds.toString().padStart(2,'0')} secondi</span>`;
+            }
+            updateTimer();
+            setInterval(updateTimer, 1000);
+
+            // Crea stelline di sfondo
+            for (let i = 0; i < 30; i++) {
+                let star = document.createElement('div');
+                star.className = 'star';
+                star.style.cssText = `
+                    width: ${Math.random()*6+2}px;
+                    height: ${Math.random()*6+2}px;
+                    background: rgba(255, ${160+Math.random()*95}, ${160+Math.random()*95}, ${0.3+Math.random()*0.4});
+                    border-radius: 50%;
+                    left: ${Math.random()*100}%;
+                    top: ${Math.random()*100}%;
+                    animation-duration: ${10+Math.random()*15}s;
+                `;
+                bgParticles.appendChild(star);
+                stars.push(star);
+            }
+
+            // Funzione per disegnare un cuoricino
+            function drawHeart(x, y, size, color) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.scale(size, size);
+                ctx.beginPath();
+                ctx.moveTo(0, 4);
+                ctx.bezierCurveTo(0, 2, -2.5, -2, -5, -1);
+                ctx.bezierCurveTo(-7, 0, -7, 4, -4, 6);
+                ctx.bezierCurveTo(-2, 8, 0, 7, 0, 5);
+                ctx.bezierCurveTo(2, 7, 4, 8, 6, 6);
+                ctx.bezierCurveTo(9, 4, 9, 0, 5, -1);
+                ctx.bezierCurveTo(2.5, -2, 0, 2, 0, 4);
+                ctx.closePath();
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            // Albero con chioma piena di cuori
+            function drawHeartTree(progress) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (progress <= 0.0) return;
+
+                const groundY = 440;
+                const trunkBaseX = 375;
+                const trunkHeight = 150 * Math.min(1, progress * 1.2);
+                const trunkWidth = 36;
+
+                // Tronco
+                ctx.fillStyle = '#b87c4b';
+                ctx.beginPath();
+                ctx.moveTo(trunkBaseX - trunkWidth/2, groundY);
+                ctx.lineTo(trunkBaseX - trunkWidth/2 + 5, groundY - trunkHeight);
+                ctx.lineTo(trunkBaseX + trunkWidth/2 - 5, groundY - trunkHeight);
+                ctx.lineTo(trunkBaseX + trunkWidth/2, groundY);
+                ctx.closePath();
+                ctx.fill();
+
+                // Venature leggere
+                ctx.strokeStyle = '#9d6b3e';
+                ctx.lineWidth = 1.5;
+                for (let i=1; i<=3; i++) {
+                    let y = groundY - trunkHeight * i/4;
+                    ctx.beginPath();
+                    ctx.moveTo(trunkBaseX - 12, y);
+                    ctx.lineTo(trunkBaseX + 10, y-8);
+                    ctx.strokeStyle = '#b87c4b';
+                    ctx.stroke();
+                }
+
+                // Base del tronco
+                ctx.fillStyle = '#9d6b3e';
+                ctx.beginPath();
+                ctx.ellipse(trunkBaseX, groundY-5, trunkWidth/2+6, 10, 0, 0, 2*Math.PI);
+                ctx.fill();
+
+                // Chioma
+                if (progress > 0.25) {
+                    const crownProgress = Math.min(1, (progress - 0.2) / 0.8);
+                    const crownWidth = 240 * crownProgress;
+                    const crownHeight = 190 * crownProgress;
+                    const crownX = trunkBaseX;
+                    const crownY = groundY - trunkHeight - crownHeight/2 + 25;
+
+                    const heartCount = Math.floor(700 * crownProgress);
+                    const colors = ['#ff4d6d', '#ff6b8b', '#ff8aa8', '#ff5777', '#ff3355', '#ffb3c6', '#ff99aa', '#ffc0cb'];
+
+                    for (let i = 0; i < heartCount; i++) {
+                        let angle = Math.random() * 2 * Math.PI;
+                        let radius = Math.pow(Math.random(), 1.2);
+                        let x = crownX + Math.cos(angle) * (crownWidth/2) * radius;
+                        let y = crownY + Math.sin(angle) * (crownHeight/2) * radius * 0.9;
+
+                        x += (Math.random() - 0.5) * 20;
+                        y += (Math.random() - 0.5) * 20;
+
+                        let size = 0.5 + 0.6 * Math.random();
+                        if (radius > 0.7) size *= 0.7;
+
+                        let color = colors[Math.floor(Math.random() * colors.length)];
+                        drawHeart(x, y, size, color);
+                    }
+
+                    // Cuori volanti
+                    if (!window.floatingStarted && crownProgress > 0.7) {
+                        window.floatingStarted = true;
+                        setInterval(() => {
+                            if (!canvas.style.display || canvas.style.display === 'none') return;
+                            for (let j = 0; j < 2; j++) {
+                                let angle = Math.PI + (Math.random() * 1.2 - 0.6);
+                                let radius = 0.7 + Math.random() * 0.3;
+                                let startX = crownX + Math.cos(angle) * (crownWidth/2) * radius;
+                                let startY = crownY + Math.sin(angle) * (crownHeight/2) * radius * 0.9;
+                                startX += (Math.random() - 0.5) * 15;
+                                startY += (Math.random() - 0.5) * 15;
+                                floatingHearts.push({
+                                    x: startX, y: startY,
+                                    vx: -0.6 - Math.random() * 1.2,
+                                    vy: -0.3 - Math.random() * 0.9,
+                                    size: 0.4 + Math.random() * 0.7,
+                                    color: colors[Math.floor(Math.random() * colors.length)],
+                                    life: 1.0,
+                                    angle: Math.random() * Math.PI * 2,
+                                    spin: (Math.random() - 0.5) * 0.02
+                                });
+                            }
+                        }, 500);
+                    }
+
+                    // Aggiorna e disegna cuori volanti
+                    for (let i = floatingHearts.length - 1; i >= 0; i--) {
+                        let h = floatingHearts[i];
+                        h.x += h.vx;
+                        h.y += h.vy;
+                        h.life -= 0.003;
+                        h.angle += h.spin;
+                        if (h.x < 30 || h.y < 20 || h.life <= 0) {
+                            floatingHearts.splice(i, 1);
+                            continue;
+                        }
+                        ctx.save();
+                        ctx.translate(h.x, h.y);
+                        ctx.rotate(h.angle);
+                        ctx.scale(h.size, h.size);
+                        ctx.fillStyle = h.color;
+                        ctx.beginPath();
+                        ctx.moveTo(0, 4);
+                        ctx.bezierCurveTo(0, 2, -2.5, -2, -5, -1);
+                        ctx.bezierCurveTo(-7, 0, -7, 4, -4, 6);
+                        ctx.bezierCurveTo(-2, 8, 0, 7, 0, 5);
+                        ctx.bezierCurveTo(2, 7, 4, 8, 6, 6);
+                        ctx.bezierCurveTo(9, 4, 9, 0, 5, -1);
+                        ctx.bezierCurveTo(2.5, -2, 0, 2, 0, 4);
+                        ctx.closePath();
+                        ctx.globalAlpha = h.life;
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+            }
+
+            function growTree() {
+                return new Promise((resolve) => {
+                    let growth = 0.0;
+                    gsap.to({}, {
+                        duration: 4.5,
+                        ease: "power2.out",
+                        onUpdate: function() {
+                            growth = this.progress();
+                            drawHeartTree(growth);
+                        },
+                        onComplete: function() {
+                            drawHeartTree(1);
+                            function animate() {
+                                if (!canvas.style.display || canvas.style.display === 'none') return;
+                                drawHeartTree(1);
+                                requestAnimationFrame(animate);
+                            }
+                            animate();
+                            resolve();
+                        }
+                    });
+                });
+            }
+
+            // Funzione per gestire la musica
+            function playMusic() {
+                bgMusic.play()
+                    .then(() => {
+                        isMusicPlaying = true;
+                        musicControl.style.display = 'flex';
+                        musicIcon.className = 'fas fa-music';
+                        musicStatus.textContent = '🔊 In riproduzione';
+                    })
+                    .catch(error => {
+                        console.log('Autoplay bloccato:', error);
+                        // Se il browser blocca l'autoplay, mostriamo comunque il controllo
+                        musicControl.style.display = 'flex';
+                        musicIcon.className = 'fas fa-volume-mute';
+                        musicStatus.textContent = '🔇 Clicca per attivare';
+                    });
+            }
+
+            // Toggle play/pause
+            function toggleMusic() {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    musicIcon.className = 'fas fa-music';
+                    musicStatus.textContent = '🔊 In riproduzione';
+                } else {
+                    bgMusic.pause();
+                    musicIcon.className = 'fas fa-volume-mute';
+                    musicStatus.textContent = '🔇 In pausa';
+                }
+            }
+
+            // Event listener per il controllo musica
+            musicControl.addEventListener('click', toggleMusic);
+
+            // Click sul cuore
+            heartBtn.addEventListener('click', async function() {
+                if (animationStarted) return;
+                animationStarted = true;
+                heartBtn.style.pointerEvents = 'none';
+
+                // Avvia la musica
+                playMusic();
+
+                await gsap.to(heartBtn, {
+                    scale: 0.2,
+                    opacity: 0,
+                    duration: 0.7,
+                    ease: "back.in(1.5)",
+                });
+                heartBtn.style.display = 'none';
+                seed.style.display = 'block';
+
+                await gsap.to(seed, {
+                    y: 80,
+                    rotation: 40,
+                    duration: 1.2,
+                    ease: "bounce.out",
+                });
+                seed.style.display = 'none';
+                canvas.style.display = 'block';
+                await growTree();
+                finalMsg.classList.add('show');
+            });
+
+            drawHeartTree(0);
+        })();
+    </script>
 </body>
 </html>
-
-
